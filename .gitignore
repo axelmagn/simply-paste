@@ -2,4 +2,7 @@
 *.pot
 *.pyc
 local_settings.py
+
+# dev env folders
 venv
+site-packages
