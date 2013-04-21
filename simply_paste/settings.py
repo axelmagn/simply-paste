@@ -134,9 +134,8 @@ INSTALLED_APPS = (
     'sekizai',
     'south',
 
-
     # local
-    'content',
+    'snippets',
 )
 
 # A sample logging configuration. The only tangible logging
