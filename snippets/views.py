@@ -24,4 +24,7 @@ class SnippetCreateView(generics.CreateAPIView):
 
     """
     model = Snippet
+    renderer_classes = (renderers.TemplateHTMLRenderer,)
+    def get(self, request, *args, **kwargs):
+        return Response(template_name='snippets/snippet_create.html')
 

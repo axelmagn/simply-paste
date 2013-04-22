@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load staticfiles sekizai_tags %}
+
+{% block content %}
+
+<div id="paste-box">
+</div>
+
+{% addtoblock "css" %}
+<link rel="stylesheet" href="{% static 'css/codemirror.css' %}">
+{% endaddtoblock %}
+
+{% addtoblock "js" %}
+<script src="{% static 'js/codemirror.js' %}"></script>
+<script src="{% static 'js/mode/javascript/javascript.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var pasteCodeMirror = CodeMirror($('#paste-box')[0]);
+    });
+</script>
+{% endaddtoblock %}
+
+
+{% endblock %}
