@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Some Code</h1>
+<p>
+Language: {{ snippet.language }}
+</p>
+<p>
+created: {{ snippet.created }}
+</p>
+
+<pre class="prettyprint linenums">
+{{ snippet.content|escape }}
+</pre>
+{% endblock %}
