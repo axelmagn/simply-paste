@@ -30,9 +30,8 @@ class SnippetRetrieve(generics.RetrieveAPIView):
 
 
 
-class SnippetPush(generics.GenericAPIView,
-                  mixins.CreateModelMixin,
-                  mixins.UpdateModelMixin):
+class SnippetPush(SnippetUpdate,
+                  mixins.CreateModelMixin):
     """
     Session-based Snipped posting endpoint
 
@@ -53,8 +52,15 @@ class SnippetPush(generics.GenericAPIView,
             return response
         # if updating
         else:
-            # populate snippet id w/ cached session info
-            # TODO: request.DATA is immutable.  Must create copy. BUG
-            request.DATA['id'] = snippet_id
+            # overwrite snippet id w/ cached session info
+            self.kwargs[self.pk_url_kwarg] = snippet_id
             # call post from SnippetUpdate
-            return self.update(self, request, *args, **kwargs)
+            return self.update(request, *args, **kwargs)
+
+
+
+
+
+
+
+
