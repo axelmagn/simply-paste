@@ -1,24 +1,36 @@
 {% extends "base.html" %}
-{% load staticfiles sekizai_tags %}
+{% load sekizai_tags %}
 
 {% block content %}
 
-<div id="paste-box">
-</div>
-
 {% addtoblock "css" %}
-<link rel="stylesheet" href="{% static 'css/codemirror.css' %}">
+<style type="text/css" media="screen">
+    #editor { 
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+    html, body, #editor {
+        margin: 0;
+        padding: 0;
+    }
+</style>
 {% endaddtoblock %}
 
+<div id="editor">function foo(items) {
+    var x = "All this is syntax highlighted";
+    return x;
+}</div>
+    
 {% addtoblock "js" %}
-<script src="{% static 'js/codemirror.js' %}"></script>
-<script src="{% static 'js/mode/javascript/javascript.js' %}"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        var pasteCodeMirror = CodeMirror($('#paste-box')[0]);
-    });
+<script src="http://rawgithub.com/ajaxorg/ace-builds/master/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    // editor.getSession().setMode("ace/mode/javascript");
 </script>
 {% endaddtoblock %}
-
 
 {% endblock %}

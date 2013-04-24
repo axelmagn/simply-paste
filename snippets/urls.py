@@ -2,6 +2,7 @@ from django.conf.urls import patterns, url
 from rest_framework.urlpatterns import format_suffix_patterns
 from snippets import api, views
 
+
 urlpatterns = patterns('',
         # main views
         url(r'^(?P<pk>[0-9]+)/$', views.SnippetRetrieveView.as_view(),
