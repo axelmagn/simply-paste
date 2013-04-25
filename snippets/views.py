@@ -14,7 +14,7 @@ class SnippetRetrieveView(generics.RetrieveAPIView):
         snippet = self.get_object()
         return Response(
                 {'snippet': snippet},
-                template_name='snippets/snippet_retrieve.html'
+                template_name='snippets/retrieve.html'
         )
 
 
@@ -26,5 +26,5 @@ class SnippetCreateView(generics.CreateAPIView):
     model = Snippet
     renderer_classes = (renderers.TemplateHTMLRenderer,)
     def get(self, request, *args, **kwargs):
-        return Response(template_name='snippets/snippet_create.html')
+        return Response(template_name='snippets/create.html')
 

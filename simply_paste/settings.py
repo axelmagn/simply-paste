@@ -82,6 +82,9 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+STATICFILES_STORAGE = 'require.storage.OptimizedCachedStaticFilesStorage'
+
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '5&rngu$j5yc=che82*w%$=l4n!3o1p2q7-+3tpv!o0%35p!kb7'
 
@@ -143,6 +146,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'sekizai',
     'south',
+    'require',
 
     # local
     'snippets',
@@ -176,3 +180,31 @@ LOGGING = {
         },
     }
 }
+
+
+# django-require settings, an app that implements require.js on a django server
+
+# The baseUrl to pass to the r.js optimizer.
+REQUIRE_BASE_URL = "js"
+
+# The name of a build profile to use for your project, relative to REQUIRE_BASE_URL.
+# A sensible value would be 'app.build.js'. Leave blank to use the built-in default build profile.
+REQUIRE_BUILD_PROFILE = 'simply-paste.build.js'
+
+# The name of the require.js script used by your project, relative to REQUIRE_BASE_URL.
+REQUIRE_JS = "require-jquery.js"
+
+# A dictionary of standalone modules to build with almond.js.
+# See the section on Standalone Modules, below.
+REQUIRE_STANDALONE_MODULES = {}
+
+# Whether to run django-require in debug mode.
+REQUIRE_DEBUG = DEBUG
+
+# A tuple of files to exclude from the compilation result of r.js.
+REQUIRE_EXCLUDE = ("build.txt",)
+
+# The execution environment in which to run r.js: auto, node or rhino.
+# auto will autodetect the environment and make use of node if available and rhino if not.
+# It can also be a path to a custom class that subclasses require.environments.Environment and defines some "args" function that returns a list with the command arguments to execute.
+REQUIRE_ENVIRONMENT = "auto"

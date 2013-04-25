@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load sekizai_tags require %}
+
+{% block content %}
+
+{% addtoblock "css" %}
+<style type="text/css" media="screen">
+    #editor { 
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+    html, body, #editor {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+{% endaddtoblock %}
+
+<div id="editor">
+Hello World!
+</div>
+    
+{% addtoblock "js" %}
+{% require_module "main" %}
+{% endaddtoblock %}
+
+{% endblock %}
