@@ -1,25 +1,26 @@
 {% extends "base.html" %}
-{% load sekizai_tags require %}
+{% load staticfiles sekizai_tags require %}
 
 {% block content %}
 
 {% addtoblock "css" %}
 <style type="text/css" media="screen">
-    #editor { 
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-    }
-    html, body, #editor {
-        margin: 0;
-        padding: 0;
-    }
 </style>
+<link rel="stylesheet" href="{% static 'css/snippets.css' %}">
 {% endaddtoblock %}
 
 <div id="editor"></div>
+
+<div id="loading-spinner">
+    <p>Insert Spinner Here</p>
+</div>
+
+<div id="display-url"></div>
+<div id="lang-selector">
+    <select name="language">
+        <option value="text">Text</option>
+    </select>
+</div>
     
 {% addtoblock "js" %}
 {% require_module "snippet_create" %}
