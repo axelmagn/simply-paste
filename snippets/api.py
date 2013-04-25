@@ -1,5 +1,7 @@
 from rest_framework import generics, views, mixins
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.reverse import reverse
 from snippets.models import Snippet
 from snippets.serializers import SnippetSerializer
 import pdb # DEBUG
@@ -8,15 +10,32 @@ import pdb # DEBUG
 SESSION_SNIPPET_ID = 'snippet_id'
 
 
+@api_view(('GET',))
+def api_root(request, format=None):
+    return Response({
+        'snippet-push'  : reverse('snippet-push-api', request=request,
+                                  format=format),
+        'snippet-create': reverse('snippet-create-api', request=request,
+                                  format=format)
+    })
+
+
+class SnippetList(generics.ListAPIView):
+    """RESTful list for Snippet Model"""
+    model = Snippet
+    serializer_class = SnippetSerializer
+
+
+
 class SnippetCreate(generics.CreateAPIView):
-    """Standard RESTful create for Snippet Model"""
+    """RESTful create for Snippet Model"""
     model = Snippet
     serializer_class = SnippetSerializer
 
 
 
 class SnippetUpdate(generics.UpdateAPIView):
-    """Standard RESTful update for Snippet Model"""
+    """RESTful update for Snippet Model"""
     # TODO: session auth
     model = Snippet
     serializer_class = SnippetSerializer
@@ -24,7 +43,7 @@ class SnippetUpdate(generics.UpdateAPIView):
 
 
 class SnippetRetrieve(generics.RetrieveAPIView):
-    """Standard RESTful retrieve for Snippet Model"""
+    """RESTful retrieve for Snippet Model"""
     model = Snippet
     serializer_class = SnippetSerializer
 

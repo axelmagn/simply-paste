@@ -8,13 +8,26 @@
  *   - 'dir' will be overidden by django-require during the build process. 
  */
 ({
+
+    /*
+     * paths to use for modules
+     */
+    paths: {
+        "util"      : "util",
+        "jquery"    : "require-jquery",
+        "ace"       : "ace"
+    },
     
     /*
      * List the modules that will be optimized. All their immediate and deep
      * dependencies will be included in the module's file when the build is
      * done. A minimum module entry is {name: "module_name"}.
      */
-    modules: [],
+    modules: [
+        {
+            name: "snippet_create",
+            exclude: ["jquery"]
+    ],
 
     /*
      * Allow CSS optimizations. Allowed values:
@@ -58,5 +71,7 @@
      * files.
      */
     skipDirOptimize: false
+
+
     
 })

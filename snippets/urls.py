@@ -11,6 +11,7 @@ urlpatterns = patterns('',
             name="snippet-create"),
 
         # api
+        url(r'^api/$', api.api_root),
         url(r'^api/snippets/create/$', api.SnippetCreate.as_view(),
             name="snippet-create-api"),
         url(r'^api/snippets/(?P<pk>[0-9]+)/$', api.SnippetRetrieve.as_view(),

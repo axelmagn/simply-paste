@@ -1,7 +1,9 @@
-requirejs(["ace/ace"], function(ace) {
-    var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
-    // editor.getSession().setMode("ace/mode/javascript");
-    editor.insert("Inserted text Muthafucka!");
-    window['editor'] = editor;
+requirejs(["ace/ace", "util/editor", "util/snippet_api"], function(ace, editor, api) {
+    // init vars
+
+    // start editor
+    editor.init("editor");
+
+    // get api
+    console.log(api.responseJSON);
 });
