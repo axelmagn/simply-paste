@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="11.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.ActivityDiagramText</type>
+    <coordinates>
+      <x>0</x>
+      <y>10</y>
+      <w>234</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.SequenceDiagram</type>
+    <coordinates>
+      <x>450</x>
+      <y>110</y>
+      <w>370</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>title: SnippetPush Interaction
+_user~user_|_browser~browser_|_server~server_
+user-&gt;&gt;browser:user,browser:change content
+browser-&gt;&gt;&gt;browser:local_content
+browser-&gt;server:browser,server:SnippetPush
+server.&gt;browser:browser,server:return msg
+browser-&gt;browser:remote_content
+browser-&gt;&gt;user:snippet url
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
