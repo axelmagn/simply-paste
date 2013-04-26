@@ -23,11 +23,10 @@
      * dependencies will be included in the module's file when the build is
      * done. A minimum module entry is {name: "module_name"}.
      */
-    modules: [
-        {
+    modules:  [{
             name: "snippet_create",
             exclude: ["jquery"]
-    ],
+    }],
 
     /*
      * Allow CSS optimizations. Allowed values:
