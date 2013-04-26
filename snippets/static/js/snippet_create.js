@@ -19,6 +19,7 @@ requirejs(["jquery", "util/editor"], function($, editor_util) {
 
     /**
      * Set up the app on startup
+     *
      */
     init = function () {
         // start editor
@@ -31,6 +32,10 @@ requirejs(["jquery", "util/editor"], function($, editor_util) {
         elements.spinner.hide();
         elements.displayUrl.hide();
         elements.langSelector.hide();
+        editor.on("change", function () {
+            syncPush();
+            updateUI();
+        });
     }
 
 
@@ -41,13 +46,15 @@ requirejs(["jquery", "util/editor"], function($, editor_util) {
      */
     snippetPush = function( snippet ) {
         // TODO: show spinner
-        showSpinner();
+        elements.spinner.show();
         $.ajax({
+            type:       "POST",
             dataType:   "json",
             url:        "/api/snippets/push/",
             data:       snippet,
             success: function ( data ) {
                 // store remote state
+                console.log( data );
                 remoteSnippet = data;
                 // update ui
                 updateUI();
@@ -58,18 +65,12 @@ requirejs(["jquery", "util/editor"], function($, editor_util) {
             }, 
             complete: function () {
                 // hide spinner
-                hideSpinner();
+                elements.spinner.hide();
                 // sync
-                syncPush()
+                // syncPush();
             }
         });
     }
-    showSpinner = function () {
-        $(spinnerSelector).show();
-    };
-    hideSpinner = function () {
-        $(spinnerSelector).hide();
-    };
 
     /** 
      * Function: getLocalSnippet
@@ -82,8 +83,8 @@ requirejs(["jquery", "util/editor"], function($, editor_util) {
      */
     getLocalSnippet = function () {
         return {
-            'content':    editor.getContent(),
-            'language':   $( languageSelector ).val()
+            'content':    editor.getValue(),
+            'language':   elements.langSelector.find('select').val()
         };
 
     }
@@ -131,8 +132,8 @@ requirejs(["jquery", "util/editor"], function($, editor_util) {
     };
     updateUI = function () {
         // display url
-        displayUrlVal = remoteSnippet.displayUrl;
-        elements.displayUrl.html(displayUrlVal);
+        displayUrlVal = remoteSnippet.display_url;
+        elements.displayUrl.html('<a href="'+displayUrlVal+'">'+displayUrlVal+'</a>');
         if( displayUrlVal !== undefined ) {
             elements.displayUrl.show();
         } else {
@@ -140,7 +141,12 @@ requirejs(["jquery", "util/editor"], function($, editor_util) {
         }
 
         // language
-        editorContent = editor
+        editorContent = editor.getValue();
+        if( editorContent !== '' ) {
+            elements.langSelector.show();
+        } else {
+            elements.langSelector.hide();
+        }
     };
 
     init();

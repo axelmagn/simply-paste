@@ -4,10 +4,9 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from snippets.models import Snippet
 from snippets.serializers import SnippetSerializer
+from snippets.settings import SESSION_SNIPPET_ID
 import pdb # DEBUG
 
-# session key for currently active snippet
-SESSION_SNIPPET_ID = 'snippet_id'
 
 
 @api_view(('GET',))
@@ -67,7 +66,7 @@ class SnippetPush(SnippetUpdate,
         # if creating, call post from SnippetCreate
         if snippet_is_new:
             response = self.create(request, *args, **kwargs)
-            request.session[SESSION_SNIPPET_ID] = response.data['url']
+            request.session[SESSION_SNIPPET_ID] = response.data['id']
             return response
         # if updating
         else:
