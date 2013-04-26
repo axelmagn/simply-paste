@@ -30,11 +30,13 @@
 
 #lang-selector {
     position: absolute;
-    height: 40px;
-    width: 300px;
     right: 50px;
     bottom: 0px;
     background: white;
+}
+
+#lang-selector select {
+    margin: 0;
 }
 
 
