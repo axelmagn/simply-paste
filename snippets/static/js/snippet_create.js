@@ -10,24 +10,12 @@ requirejs(["jquery", "util/editor"], function($, editor_util) {
     var snippetPush, 
         remoteSnippet = {}, 
         init,
-        elements = {},
-        elementPaths,
-        getPageElements,
-        showSpinner,
-        hideSpinner,
+        elements,
         syncPush,
         updateUI,
         getLocalSnippet,
-        spinnerSelector = "#loading-spinner",
-        languageSelector = "#language-choice",
-        popoverSelector = "#snippet-popover",
         editor;
 
-    // location of all the template includes we will use
-    elementPaths = {
-        'spinner': '/static/html/spinner.html',
-        // 'popover': '/static/html/popover.html'
-    };
 
     /**
      * Set up the app on startup
@@ -35,6 +23,14 @@ requirejs(["jquery", "util/editor"], function($, editor_util) {
     init = function () {
         // start editor
         editor = editor_util.init("editor");
+        elements = {
+            'spinner': $('#loading-spinner'),
+            'displayUrl': $('#display-url'),
+            'langSelector': $("#lang-selector")
+        };
+        elements.spinner.hide();
+        elements.displayUrl.hide();
+        elements.langSelector.hide();
     }
 
 
@@ -133,7 +129,19 @@ requirejs(["jquery", "util/editor"], function($, editor_util) {
 
 
     };
-    updateUI = function () {};
+    updateUI = function () {
+        // display url
+        displayUrlVal = remoteSnippet.displayUrl;
+        elements.displayUrl.html(displayUrlVal);
+        if( displayUrlVal !== undefined ) {
+            elements.displayUrl.show();
+        } else {
+            elements.displayUrl.hide();
+        }
+
+        // language
+        editorContent = editor
+    };
 
     init();
 
