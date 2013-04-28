@@ -1,6 +1,27 @@
 {% extends "base.html" %}
 {% load staticfiles sekizai_tags require %}
 
+
+{# overwrite navbar for easy paste #}
+{% block navbar %}
+<div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="#">Pastio</a>
+    <ul class="nav">
+        <li id="display-url">
+        <a class="span3" href="#">Paste something to get started</a>
+        </li>
+    </ul>
+    <form id="lang-selector" class="pull-right navbar-form">
+        <select name="language">
+            <option value="text">Text</option>
+        </select>
+    </form>
+    <i class='icon-spinner icon-spin icon-large'></i>
+  </div>
+</div>
+{% endblock %}
+
 {% block content %}
 
 {% addtoblock "css" %}
@@ -15,13 +36,6 @@
     <p>Insert Spinner Here</p>
 </div>
 
-<div id="display-url">
-</div>
-<div id="lang-selector">
-    <select name="language">
-        <option value="text">Text</option>
-    </select>
-</div>
     
 {% addtoblock "js" %}
 {% require_module "snippet_create" %}

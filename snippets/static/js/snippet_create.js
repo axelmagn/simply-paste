@@ -29,9 +29,6 @@ requirejs(["jquery", "util/editor"], function($, editor_util) {
             'displayUrl': $('#display-url'),
             'langSelector': $("#lang-selector")
         };
-        elements.spinner.hide();
-        elements.displayUrl.hide();
-        elements.langSelector.hide();
         editor.on("change", function () {
             syncPush();
             updateUI();
@@ -54,7 +51,6 @@ requirejs(["jquery", "util/editor"], function($, editor_util) {
             data:       snippet,
             success: function ( data ) {
                 // store remote state
-                console.log( data );
                 remoteSnippet = data;
                 // update ui
                 updateUI();
@@ -133,7 +129,9 @@ requirejs(["jquery", "util/editor"], function($, editor_util) {
     updateUI = function () {
         // display url
         displayUrlVal = remoteSnippet.display_url;
-        elements.displayUrl.html('<a href="'+displayUrlVal+'">'+displayUrlVal+'</a>');
+        elements.displayUrl.html('<form class="navbar-form pull-left"> <input value="'+displayUrlVal+'" type="text" class="span3"> </form>');
+        
+        /*
         if( displayUrlVal !== undefined ) {
             elements.displayUrl.show();
         } else {
@@ -147,6 +145,7 @@ requirejs(["jquery", "util/editor"], function($, editor_util) {
         } else {
             elements.langSelector.hide();
         }
+        */
     };
 
     init();
