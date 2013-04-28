@@ -18,6 +18,8 @@ urlpatterns = patterns('',
             name="snippet-retrieve-api"),
         url(r'^api/snippets/push/$', api.SnippetPush.as_view(),
             name="snippet-push-api"),
+        url(r'^api/snippets/languages/$', api.SnippetLanguageChoices.as_view(),
+            name="snippet-lang-choices"),
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)

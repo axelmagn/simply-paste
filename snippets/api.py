@@ -2,7 +2,7 @@ from rest_framework import generics, views, mixins
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from snippets.models import Snippet
+from snippets.models import Snippet, LANGUAGE_CHOICES
 from snippets.serializers import SnippetSerializer
 from snippets.settings import SESSION_SNIPPET_ID
 import pdb # DEBUG
@@ -75,10 +75,10 @@ class SnippetPush(SnippetUpdate,
             # call post from SnippetUpdate
             return self.update(request, *args, **kwargs)
 
+class SnippetLanguageChoices(views.APIView):
+    """
+    Return the different language choices available to a snippet
 
-
-
-
-
-
-
+    """
+    def get(self, request, *args, **kwargs):
+        return Response(LANGUAGE_CHOICES);

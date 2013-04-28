@@ -1,8 +1,7 @@
 from django.db import models
-from pygments.lexers import get_all_lexers
+from snippets.langs import ACE_LANGUAGES
 
-LEXERS = [item for item in get_all_lexers() if item[1]]
-LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
+LANGUAGE_CHOICES = ACE_LANGUAGES
 
 # Create your models here.
 class Snippet(models.Model):
