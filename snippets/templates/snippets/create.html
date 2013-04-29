@@ -6,20 +6,40 @@
 {% block navbar %}
 <div class="navbar">
   <div class="navbar-inner">
-    <a class="brand" href="#">Pastio</a>
+    <a class="brand" href="#">SimplyPaste</a>
     <ul class="nav">
         <li id="display-url">
         <a class="span3" href="#">Paste something to get started</a>
         </li>
     </ul>
-    <form id="lang-selector" class="pull-right navbar-form">
-        <select name="language">
-            <option value="text">Text</option>
-        </select>
-    </form>
-    <i class='icon-spinner icon-spin icon-large'></i>
+    <ul class="nav pull-right">
+        <li>
+            <form id="lang-selector" class="navbar-form">
+                <select name="language">
+                    <option value="text">Text</option>
+                </select>
+            </form>
+        </li>
+        <li>
+        <a id="loading-spinner" href="#"><i class='icon-spinner icon-spin icon-large'></i></a>
+        </li>
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Privacy</a></li>
+        </ul>
+        </li>
+
+    </ul>
   </div>
 </div>
+
+{% addtoblock "css" %}
+<link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
+{% endaddtoblock %}
 {% endblock %}
 
 {% block content %}
@@ -31,14 +51,9 @@
 {% endaddtoblock %}
 
 <div id="editor"></div>
-
-<div id="loading-spinner">
-    <p>Insert Spinner Here</p>
-</div>
-
-    
 {% addtoblock "js" %}
 {% require_module "snippet_create" %}
+<script type="text/javascript" src="{% static "js/bootstrap.min.js" %}">
 {% endaddtoblock %}
 
 {% endblock %}

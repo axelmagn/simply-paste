@@ -5,8 +5,9 @@
  * provides a javascript interface for creating and pushing snippets
  *
  */
-requirejs(["jquery", "util/editor"], function($, editor_util) {
-    // init vars
+requirejs(["jquery",    "util/editor",  "util/snippet_api"], 
+ function($,            editor_util,    api) {
+    // init ars
     var snippetPush, 
         remoteSnippet = {}, 
         init,
@@ -33,6 +34,23 @@ requirejs(["jquery", "util/editor"], function($, editor_util) {
             syncPush();
             updateUI();
         });
+        api.getLanguages(function (data) {
+            var items = [];
+
+            $.each(data, function(index, val) {
+                var lang_id = val[0], 
+                    lang_name = val[1];
+                items.push('<option value="' + lang_id + '" '+ ( lang_id == 'text' ? 'selected' : '' ) +'>' + lang_name + '</li>');
+            });
+
+            langs = $('<select/>', {
+                'class': 'language',
+                html: items.join('')
+            })
+
+            elements.langSelector.html(langs);
+        });
+
     }
 
 
@@ -129,8 +147,7 @@ requirejs(["jquery", "util/editor"], function($, editor_util) {
     updateUI = function () {
         // display url
         displayUrlVal = remoteSnippet.display_url;
-        elements.displayUrl.html('<form class="navbar-form pull-left"> <input value="'+displayUrlVal+'" type="text" class="span3"> </form>');
-        
+        elements.displayUrl.html('<form action="'+displayUrlVal+'" method="get" class="navbar-form pull-left"> <input value="'+displayUrlVal+'" type="text" class="span3"><button type="submit" class="btn">GO</button></form>');
         /*
         if( displayUrlVal !== undefined ) {
             elements.displayUrl.show();
