@@ -28,18 +28,43 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         {% endcomment %}
         <!--[if lt IE 9]>
-            <script href="{% static 'js/vendor/html5-3.6-respond-1.1.0.min.js' %}"></script>
+        <script href="{% static 'js/vendor/html5-3.6-respond-1.1.0.min.js' %}"></script>
         <![endif]-->
         {% endaddtoblock %}
     </head>
     <body>
         <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
         <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
 
         {% block navbar %}
+        <div class="navbar">
+            <div class="navbar-inner">
+                <a class="brand" href="#">SimplyPaste</a>
+                {% block left-nav %}
+                {% endblock %}
+                {% block right-nav %}
+                <ul class="nav pull-right">
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy</a></li>
+                    </ul>
+                    </li>
+                </ul>
+                {% endblock %}
+            </div>
+        </div>
+
+        {% addtoblock "css" %}
+        <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
+        {% endaddtoblock %}
+
         {% endblock %}
 
         {% block content %}
@@ -48,13 +73,13 @@
         {% block footer %}
         {% endblock %}
 
-        </div> <!-- /container -->
+    </div> <!-- /container -->
 
-        {% render_block "js" %}
+    {% render_block "js" %}
 
-        {% comment %}
-        {% addtoblock "js" %}
-        <script>window.jQuery || document.write('<script href="{% static 'js/vendor/jquery-1.9.1.min.js' %}"><\/script>')</script>
+    {% comment %}
+    {% addtoblock "js" %}
+    <script>window.jQuery || document.write('<script href="{% static 'js/vendor/jquery-1.9.1.min.js' %}"><\/script>')</script>
 
         <script href="{% static 'js/vendor/bootstrap.min.js' %}"></script>
 

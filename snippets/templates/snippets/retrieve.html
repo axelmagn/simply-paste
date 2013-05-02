@@ -1,15 +1,35 @@
 {% extends "base.html" %}
+{% load staticfiles sekizai_tags require %}
+
+{% block left-nav %}
+<p class="navbar-text" id="lang-display">{{ snippet.language }}</p>
+{% endblock %}
+{% block right-nav %}
+<ul class="nav pull-right">
+    <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Privacy</a></li>
+    </ul>
+    </li>
+</ul>
+{% endblock %}
 
 {% block content %}
-<h1>Some Code</h1>
-<p>
-Language: {{ snippet.language }}
-</p>
-<p>
-created: {{ snippet.created }}
-</p>
 
-<pre class="prettyprint linenums">
-{{ snippet.content|escape }}
-</pre>
+{% addtoblock "css" %}
+<style type="text/css" media="screen">
+</style>
+<link rel="stylesheet" href="{% static 'css/snippets.css' %}">
+{% endaddtoblock %}
+<div id="editor">
+    {{ snippet.content }}
+</div>
+{% addtoblock "js" %}
+{% require_module "snippet_retrieve" %}
+{% endaddtoblock %}
+
 {% endblock %}

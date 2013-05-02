@@ -32,7 +32,11 @@ requirejs(["jquery",    "util/editor",  "util/snippet_api"],
         };
         editor.on("change", function () {
             syncPush();
-            updateUI();
+        });
+        elements.langSelector.on("change", function( data ) {
+            syncPush();
+            lang = elements.langSelector.find("select").val();
+            editor.getSession().setMode("ace/mode/"+lang);
         });
         api.getLanguages(function (data) {
             var items = [];
@@ -50,6 +54,8 @@ requirejs(["jquery",    "util/editor",  "util/snippet_api"],
 
             elements.langSelector.html(langs);
         });
+
+        elements.spinner.hide();
 
     }
 
@@ -82,6 +88,7 @@ requirejs(["jquery",    "util/editor",  "util/snippet_api"],
                 elements.spinner.hide();
                 // sync
                 // syncPush();
+                syncPush();
             }
         });
     }
@@ -138,7 +145,7 @@ requirejs(["jquery",    "util/editor",  "util/snippet_api"],
         }
 
         // if not synced, push local to remote
-        if( synced !== true ) {
+        if( synced !== true && localSnippet.content != '' ) {
             snippetPush( localSnippet );
         }
 
