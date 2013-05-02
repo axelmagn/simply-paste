@@ -5,8 +5,8 @@
  * provides a javascript interface for creating and pushing snippets
  *
  */
-requirejs(["jquery",    "util/editor",  "util/snippet_api"], 
- function($,            editor_util,    api) {
+requirejs(["jquery",    "util/editor",  "util/snippet_api", "bootstrap"], 
+ function($,            editor_util,    api,                bootstrap) {
     // init ars
     var snippetPush, 
         remoteSnippet = {}, 
@@ -58,6 +58,8 @@ requirejs(["jquery",    "util/editor",  "util/snippet_api"],
             elements.langSelector.html(langs);
         });
 
+        // update the ui
+        updateUI();
     }
 
 
@@ -169,7 +171,10 @@ requirejs(["jquery",    "util/editor",  "util/snippet_api"],
     updateUI = function () {
         // display url if we have a remote snippet to point to
         displayUrlVal = remoteSnippet.display_url;
-        elements.displayUrl.html('<form action="'+displayUrlVal+'" method="get" class="navbar-form pull-left"> <input value="'+displayUrlVal+'" type="text" class="span3"><button type="submit" class="btn">GO</button></form>');
+        if( displayUrlVal !== undefined )
+        {
+            elements.displayUrl.html('<form class="navbar-form pull-left"> <input value="'+displayUrlVal+'" type="text" class="span3"></form><a href="'+displayUrlVal+'" class="btn">GO</a>');
+        }
 
         // spinner correlates to currently pushing a snippet to server
         if( isPushing ) 

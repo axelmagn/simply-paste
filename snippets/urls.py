@@ -8,7 +8,7 @@ urlpatterns = patterns('',
         url(r'^(?P<pk>[0-9]+)/$', views.SnippetRetrieveView.as_view(),
             name="snippet-retrieve"),
         url(r'^$', views.SnippetCreateView.as_view(),
-            name="snippet-create"),
+            name="home"),
 
         # api
         url(r'^api/$', api.api_root),

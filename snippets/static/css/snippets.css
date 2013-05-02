@@ -6,6 +6,10 @@
     left: 0;
 }
 
+#display-url {
+    display: inline-block;
+}
+
 #display-url>form.navbar-form>input {
     padding: inherit 15px;
     margin-left: 30px;

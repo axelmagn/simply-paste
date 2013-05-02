@@ -5,16 +5,13 @@
  * provides a javascript interface for creating and pushing snippets
  *
  */
-requirejs(["jquery",    "util/editor",  "util/snippet_api"], 
- function($,            editor_util,    api) {
+requirejs(["jquery",    "util/editor",  "util/snippet_api", "bootstrap"], 
+ function($,            editor_util,    api,                bootstrap) {
     // init ars
     var snippetPush, 
         remoteSnippet = {}, 
         init,
         elements,
-        syncPush,
-        updateUI,
-        getLocalSnippet,
         editor;
 
 
@@ -28,8 +25,11 @@ requirejs(["jquery",    "util/editor",  "util/snippet_api"],
         editor.setReadOnly( true );
         // read elements
         elements = {
+            'language': $('#lang-display')
         };
         // set language
+        lang = elements.language.html();
+        editor.getSession().setMode("ace/mode/"+lang);
     }
 
 
