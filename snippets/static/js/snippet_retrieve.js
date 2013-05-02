@@ -25,7 +25,10 @@ requirejs(["jquery",    "util/editor",  "util/snippet_api"],
     init = function () {
         // start editor
         editor = editor_util.init("editor");
+        editor.setReadOnly( true );
         // read elements
+        elements = {
+        };
         // set language
     }
 

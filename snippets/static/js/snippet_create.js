@@ -15,8 +15,10 @@ requirejs(["jquery",    "util/editor",  "util/snippet_api"],
         syncPush,
         updateUI,
         getLocalSnippet,
+        isPushing = false,
+        errorFlag = false,
+        errorMessage,
         editor;
-
 
     /**
      * Set up the app on startup
@@ -28,7 +30,8 @@ requirejs(["jquery",    "util/editor",  "util/snippet_api"],
         elements = {
             'spinner': $('#loading-spinner'),
             'displayUrl': $('#display-url'),
-            'langSelector': $("#lang-selector")
+            'langSelector': $("#lang-selector"),
+            'errorIcon': $("#error-icon")
         };
         editor.on("change", function () {
             syncPush();
@@ -55,8 +58,6 @@ requirejs(["jquery",    "util/editor",  "util/snippet_api"],
             elements.langSelector.html(langs);
         });
 
-        elements.spinner.hide();
-
     }
 
 
@@ -66,29 +67,33 @@ requirejs(["jquery",    "util/editor",  "util/snippet_api"],
      * TODO: replace hardcoded api endpoints with more dynamic system
      */
     snippetPush = function( snippet ) {
-        // TODO: show spinner
-        elements.spinner.show();
+        isPushing = true;
+        updateUI();
         $.ajax({
             type:       "POST",
             dataType:   "json",
             url:        "/api/snippets/push/",
             data:       snippet,
-            success: function ( data ) {
+            success: function ( data ) 
+            {
+                // cannot set in complete due to race conditions
+                isPushing = false;
                 // store remote state
                 remoteSnippet = data;
-                // update ui
-                updateUI();
+                // sync again to keep remote content up to date
+                syncPush();
             },
-            error: function ( jqXHR, textStatus ) {
+            error: function ( jqXHR, textStatus ) 
+            {
+                // cannot set in complete due to race conditions
+                isPushing = false;
+                // TODO
                 // parse error message
                 // show error message
+                errorFlag = true;
             }, 
             complete: function () {
-                // hide spinner
-                elements.spinner.hide();
-                // sync
-                // syncPush();
-                syncPush();
+                updateUI();
             }
         });
     }
@@ -145,31 +150,45 @@ requirejs(["jquery",    "util/editor",  "util/snippet_api"],
         }
 
         // if not synced, push local to remote
-        if( synced !== true && localSnippet.content != '' ) {
+        if( synced !== true && localSnippet.content != '' && !isPushing ) {
+            isPushing = true;
             snippetPush( localSnippet );
+        } else {
+            isPushing = false;
         }
+
 
 
     };
+
+    /** 
+     * Function: updateUI
+     *
+     * Make any ui changes to reflect current state
+     */
     updateUI = function () {
-        // display url
+        // display url if we have a remote snippet to point to
         displayUrlVal = remoteSnippet.display_url;
         elements.displayUrl.html('<form action="'+displayUrlVal+'" method="get" class="navbar-form pull-left"> <input value="'+displayUrlVal+'" type="text" class="span3"><button type="submit" class="btn">GO</button></form>');
-        /*
-        if( displayUrlVal !== undefined ) {
-            elements.displayUrl.show();
-        } else {
-            elements.displayUrl.hide();
+
+        // spinner correlates to currently pushing a snippet to server
+        if( isPushing ) 
+        {
+            elements.spinner.show();
+        } 
+        else 
+        {
+            elements.spinner.hide();
         }
 
-        // language
-        editorContent = editor.getValue();
-        if( editorContent !== '' ) {
-            elements.langSelector.show();
-        } else {
-            elements.langSelector.hide();
+        if( errorFlag )
+        {
+            elements.errorIcon.show();
         }
-        */
+        else
+        {
+            elements.errorIcon.hide();
+        }
     };
 
     init();
