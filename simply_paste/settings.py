@@ -9,7 +9,7 @@ import dj_database_url
 gettext = lambda s: s
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -82,7 +82,7 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-STATICFILES_STORAGE = 'require.storage.OptimizedCachedStaticFilesStorage'
+# STATICFILES_STORAGE = 'require.storage.OptimizedCachedStaticFilesStorage'
 
 
 # Make this unique, and don't share it with anybody.
