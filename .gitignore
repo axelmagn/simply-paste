@@ -6,4 +6,3 @@ local_settings.py
 # dev env folders
 venv
 site-packages
-simply_paste/static
