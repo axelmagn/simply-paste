@@ -1,4 +1,4 @@
-{% load staticfiles sekizai_tags %}
+{% load staticfiles sekizai_tags require %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -52,8 +52,8 @@
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Terms</a></li>
-                        <li><a href="#">Privacy</a></li>
+                        <li><a href="{% url "terms" %}">Terms</a></li>
+                        <li><a href="{% url "privacy" %}">Privacy</a></li>
                     </ul>
                     </li>
                 </ul>
@@ -76,6 +76,10 @@
     </div> <!-- /container -->
 
     {% render_block "js" %}
+
+    {% block require_js %}
+    {% require_module "base" %}
+    {% endblock %}
 
     {% comment %}
     {% addtoblock "js" %}
