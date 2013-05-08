@@ -143,6 +143,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     # 3rd party
+    'gunicorn',
     'rest_framework',
     'sekizai',
     'south',
