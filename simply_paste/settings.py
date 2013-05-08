@@ -221,7 +221,8 @@ AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 
 # note that we override old vars
-STATIC_URL = 'https://'+AWS_STORAGE_BUCKET_NAME +'.s3.amazonaws.com/static/'
-MEDIA_URL = 'https://'+AWS_STORAGE_BUCKET_NAME +'.s3.amazonaws.com/media/'
-ADMIN_MEDIA_PREFIX = 'https://'+AWS_STORAGE_BUCKET_NAME +'.s3.amazonaws.com/static/admin/'
+if not DEBUG:
+    STATIC_URL = 'https://'+AWS_STORAGE_BUCKET_NAME +'.s3.amazonaws.com/static/'
+    MEDIA_URL = 'https://'+AWS_STORAGE_BUCKET_NAME +'.s3.amazonaws.com/media/'
+    ADMIN_MEDIA_PREFIX = 'https://'+AWS_STORAGE_BUCKET_NAME +'.s3.amazonaws.com/static/admin/'
 
