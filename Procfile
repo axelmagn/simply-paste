@@ -1,1 +1,1 @@
-web: gunicorn simply_paste.wsgi
+web: python manage.py run_gunicorn
