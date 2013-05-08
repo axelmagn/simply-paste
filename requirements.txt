@@ -8,6 +8,7 @@ django-admin-bootstrapped==0.3.2
 django-classy-tags==0.4
 django-require==1.0.3
 django-sekizai==0.7
+django-storages==1.1.8
 djangorestframework==2.2.7
 gunicorn==0.17.4
 psycopg2==2.5
