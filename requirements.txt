@@ -2,6 +2,7 @@ Django==1.5.1
 Pygments==1.6
 South==0.7.6
 argparse==1.2.1
+boto==2.9.2
 distribute==0.6.24
 dj-database-url==0.2.1
 django-admin-bootstrapped==0.3.2
