@@ -148,6 +148,7 @@ INSTALLED_APPS = (
     'sekizai',
     'south',
     'require',
+    'storages',
 
     # local
     'snippets',
@@ -209,3 +210,18 @@ REQUIRE_EXCLUDE = ("build.txt",)
 # auto will autodetect the environment and make use of node if available and rhino if not.
 # It can also be a path to a custom class that subclasses require.environments.Environment and defines some "args" function that returns a list with the command arguments to execute.
 REQUIRE_ENVIRONMENT = "node"
+
+
+# django-storage settings
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+AWS_STORAGE_BUCKET_NAME = "pasterly"
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+
+# note that we override old vars
+STATIC_URL = 'https://'+AWS_STORAGE_BUCKET_NAME +'.s3.amazonaws.com/static/'
+MEDIA_URL = 'https://'+AWS_STORAGE_BUCKET_NAME +'.s3.amazonaws.com/media/'
+ADMIN_MEDIA_PREFIX = 'https://'+AWS_STORAGE_BUCKET_NAME +'.s3.amazonaws.com/static/admin/'
+
