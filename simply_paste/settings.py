@@ -11,6 +11,7 @@ PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
+STATIC_DEBUG = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -23,7 +24,10 @@ DATABASES = {'default': dj_database_url.config()}
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+        '.pasterly.com',
+        'localhost',
+]
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -61,7 +65,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
+# STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -172,11 +176,15 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'console':{
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+        },
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['console', 'mail_admins'],
             'level': 'ERROR',
             'propagate': True,
         },
@@ -213,16 +221,16 @@ REQUIRE_ENVIRONMENT = "node"
 
 
 # django-storage settings
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE    = 'snippets.storage.OptimizedCachedS3BotoStorage'
+STATICFILES_STORAGE     = 'snippets.storage.OptimizedCachedS3BotoStorage'
 
 AWS_STORAGE_BUCKET_NAME = "pasterly"
-AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY   = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_ACCESS_KEY_ID       = os.environ['AWS_ACCESS_KEY_ID']
 
 # note that we override old vars
-if not DEBUG:
-    STATIC_URL = 'https://'+AWS_STORAGE_BUCKET_NAME +'.s3.amazonaws.com/static/'
-    MEDIA_URL = 'https://'+AWS_STORAGE_BUCKET_NAME +'.s3.amazonaws.com/media/'
-    ADMIN_MEDIA_PREFIX = 'https://'+AWS_STORAGE_BUCKET_NAME +'.s3.amazonaws.com/static/admin/'
+if not STATIC_DEBUG:
+    STATIC_URL = 'https://'+AWS_STORAGE_BUCKET_NAME+'.s3.amazonaws.com/static/'
+    MEDIA_URL = 'https://'+AWS_STORAGE_BUCKET_NAME+'.s3.amazonaws.com/media/'
+    ADMIN_MEDIA_PREFIX = 'https://'+AWS_STORAGE_BUCKET_NAME+'.s3.amazonaws.com/static/admin/'
 

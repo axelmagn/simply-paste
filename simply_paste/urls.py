@@ -23,14 +23,16 @@ urlpatterns = patterns('',
     # legal pages
     url(r'^terms/$', TemplateView.as_view(template_name = "content/terms.html"),
         name="terms"),
-    url(
-            r'^privacy/$',
-            TemplateView.as_view(template_name = "content/privacy.html"),
-            name="privacy"
+    url(r'^privacy/$',
+        TemplateView.as_view(template_name = "content/privacy.html"),
+        name="privacy"
     ),
+    # about page
+    url(r'^about/$', TemplateView.as_view(template_name = "content/about.html"),
+        name="about"),
 )
 
-if settings.DEBUG:
+if settings.STATIC_DEBUG:
     urlpatterns += patterns('',
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),

@@ -1,0 +1,35 @@
+{% extends "base_span.html" %}
+
+{% block content-span %}
+<h1>About Pasterly</h1>
+<p>
+I made Pasterly because I had a very specific idea of what a pastebin should act 
+like, and I couldn't find any paste bins that did quite what I wanted.
+Particularly, why did I have to click a button to paste my stuff?  It may seem
+like a small UI detail, but when I use a pastebin it's always as an intermediary
+to some other task.  The fewer clicks the better in my opinion.
+</p>
+<p>
+Furthermore, what's up with the big text areas I'm pasting into?  This is code.
+Shouldn't it look like code?  Why can't I see highlighting before I submit, so I
+can quickly double check the info?
+</p>
+<p>
+I don't think these are big asks.  It's 2013, and a pastebin isn't rocket
+science.  So I put this site together in a weekend for my own personal use.  If
+enough people end up using it, I will keep adding features.  There is plently
+more to do.  If there is support for it, I will:
+</p>
+<ul>
+    <li>Generate real UUID's instead of sequential integers</li>
+    <li>
+    Trim down unused features in the ACE code editor for faster load times
+    </li>
+    <li>Automatically detect what language the code snippet is in</li>
+    <li>Write a CLI tool and IDE integrations</li>
+</ul>
+<p>
+If you have any comments or feedback, email me at 
+<a href="mailto:contact@pasterly.com">contact@pasterly.com</a>
+</p>
+{% endblock %}
