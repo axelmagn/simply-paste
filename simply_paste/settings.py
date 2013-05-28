@@ -12,6 +12,7 @@ PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 STATIC_DEBUG = DEBUG
+REQUIRE_DEBUG = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -208,8 +209,6 @@ REQUIRE_JS = "require-jquery.js"
 # See the section on Standalone Modules, below.
 REQUIRE_STANDALONE_MODULES = {}
 
-# Whether to run django-require in debug mode.
-REQUIRE_DEBUG = DEBUG
 
 # A tuple of files to exclude from the compilation result of r.js.
 REQUIRE_EXCLUDE = ("build.txt",)
@@ -219,18 +218,37 @@ REQUIRE_EXCLUDE = ("build.txt",)
 # It can also be a path to a custom class that subclasses require.environments.Environment and defines some "args" function that returns a list with the command arguments to execute.
 REQUIRE_ENVIRONMENT = "node"
 
-
-# django-storage settings
-DEFAULT_FILE_STORAGE    = 'snippets.storage.OptimizedCachedS3BotoStorage'
-STATICFILES_STORAGE     = 'snippets.storage.OptimizedCachedS3BotoStorage'
-
 AWS_STORAGE_BUCKET_NAME = "pasterly"
 AWS_SECRET_ACCESS_KEY   = os.environ['AWS_SECRET_ACCESS_KEY']
 AWS_ACCESS_KEY_ID       = os.environ['AWS_ACCESS_KEY_ID']
+AWS_URL                 = 'https://'+AWS_STORAGE_BUCKET_NAME+'.s3.amazonaws.com/'
 
-# note that we override old vars
-if not STATIC_DEBUG:
-    STATIC_URL = 'https://'+AWS_STORAGE_BUCKET_NAME+'.s3.amazonaws.com/static/'
-    MEDIA_URL = 'https://'+AWS_STORAGE_BUCKET_NAME+'.s3.amazonaws.com/media/'
-    ADMIN_MEDIA_PREFIX = 'https://'+AWS_STORAGE_BUCKET_NAME+'.s3.amazonaws.com/static/admin/'
+# django-storage settings
+STORAGE_S3          = 'S3'
+STORAGE_REQUIRE     = 'REQUIRE'
+STORAGE_S3_REQUIRE  = 'S3_REQUIRE'
+
+# STORAGE_METHOD = STORAGE_S3
+STORAGE_METHOD = STORAGE_REQUIRE
+
+# TODO: join url strings properly to be slash agnostic
+# S3
+if STORAGE_METHOD == STORAGE_S3:
+    DEFAULT_FILE_STORAGE    = 'storages.backends.s3boto.S3BotoStorage'
+    STATICFILES_STORAGE     = 'storages.backends.s3boto.S3BotoStorage'
+    STATIC_URL              = AWS_URL + 'static/'
+    MEDIA_URL               = AWS_URL + 'media/'
+    ADMIN_MEDIA_PREFIX      = AWS_URL + 'static/admin/'
+# django-require
+if STORAGE_METHOD == STORAGE_REQUIRE:
+    DEFAULT_FILE_STORAGE    = 'require.storage.OptimizedStaticFilesStorage'
+    STATICFILES_STORAGE     = 'require.storage.OptimizedStaticFilesStorage'
+# django-require + S3
+if STORAGE_METHOD == STORAGE_S3_REQUIRE:
+    DEFAULT_FILE_STORAGE    = 'snippets.storage.OptimizedCachedS3BotoStorage'
+    STATICFILES_STORAGE     = 'snippets.storage.OptimizedCachedS3BotoStorage'
+    STATIC_URL              = AWS_URL + 'static/'
+    MEDIA_URL               = AWS_URL + 'media/'
+    ADMIN_MEDIA_PREFIX      = AWS_URL + 'static/admin/'
+
 

@@ -26,7 +26,8 @@
         "bootstrap": {
           deps: ["jquery"],
           exports: "$.fn.popover"
-    }
+        }
+    },
     /*
      * List the modules that will be optimized. All their immediate and deep
      * dependencies will be included in the module's file when the build is
