@@ -223,6 +223,8 @@ AWS_STORAGE_BUCKET_NAME = "pasterly"
 AWS_SECRET_ACCESS_KEY   = os.environ['AWS_SECRET_ACCESS_KEY']
 AWS_ACCESS_KEY_ID       = os.environ['AWS_ACCESS_KEY_ID']
 AWS_URL                 = 'https://'+AWS_STORAGE_BUCKET_NAME+'.s3.amazonaws.com/'
+AWS_S3_CUSTOM_DOMAIN    = 'd3uh7ya8h9x9la.cloudfront.net'
+# AWS_URL                 = 'https://d3uh7ya8h9x9la.cloudfront.net/'
 
 # django-storage settings
 STORAGE_S3          = 'S3'
@@ -247,8 +249,8 @@ if STORAGE_METHOD == STORAGE_REQUIRE:
     STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
 # django-require + S3
 if STORAGE_METHOD == STORAGE_S3_REQUIRE:
-    DEFAULT_FILE_STORAGE    = 'snippets.storage.OptimizedCachedS3BotoStorage'
-    STATICFILES_STORAGE     = 'snippets.storage.OptimizedCachedS3BotoStorage'
+    DEFAULT_FILE_STORAGE    = 'snippets.storage.OptimizedS3BotoStorage'
+    STATICFILES_STORAGE     = 'snippets.storage.OptimizedS3BotoStorage'
     STATIC_URL              = AWS_URL + 'static/'
     MEDIA_URL               = AWS_URL + 'media/'
     ADMIN_MEDIA_PREFIX      = AWS_URL + 'static/admin/'
