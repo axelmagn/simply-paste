@@ -28,6 +28,8 @@ DATABASES = {'default': dj_database_url.config()}
 ALLOWED_HOSTS = [
         '.pasterly.com',
         'localhost',
+        'simply-paste-testing.herokuapp.com',
+        'simply-paste.herokuapp.com',
 ]
 
 # Local time zone for this installation. Choices can be found here:
