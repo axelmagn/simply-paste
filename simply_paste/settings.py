@@ -225,7 +225,7 @@ AWS_STORAGE_BUCKET_NAME = "pasterly"
 AWS_SECRET_ACCESS_KEY   = os.environ['AWS_SECRET_ACCESS_KEY']
 AWS_ACCESS_KEY_ID       = os.environ['AWS_ACCESS_KEY_ID']
 AWS_URL                 = 'https://'+AWS_STORAGE_BUCKET_NAME+'.s3.amazonaws.com/'
-AWS_S3_CUSTOM_DOMAIN    = 'd3uh7ya8h9x9la.cloudfront.net'
+AWS_S3_CUSTOM_DOMAIN    = 'static.pasterly.com'
 # AWS_URL                 = 'https://d3uh7ya8h9x9la.cloudfront.net/'
 
 # django-storage settings
