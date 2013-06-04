@@ -1,5 +1,6 @@
 from django.db import models
 from snippets.langs import ACE_LANGUAGES
+from shortuuidfield import ShortUUIDField
 
 LANGUAGE_CHOICES = ACE_LANGUAGES
 
@@ -9,7 +10,8 @@ class Snippet(models.Model):
     Snippet of code or text pasted by user
 
     """
-    # TODO: slug
+    # uuid
+    uuid = ShortUUIDField(unique=True, db_index=True)
     # content
     content = models.TextField()
     # language
