@@ -66,7 +66,7 @@ class SnippetPush(SnippetUpdate,
         # if creating, call post from SnippetCreate
         if snippet_is_new:
             response = self.create(request, *args, **kwargs)
-            request.session[SESSION_SNIPPET_ID] = response.data['id']
+            request.session[SESSION_SNIPPET_ID] = response.data['uuid']
             return response
         # if updating
         else:

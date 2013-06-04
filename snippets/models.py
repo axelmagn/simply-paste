@@ -11,7 +11,7 @@ class Snippet(models.Model):
 
     """
     # uuid
-    uuid = ShortUUIDField(unique=True, db_index=True)
+    uuid = ShortUUIDField(primary_key=True, unique=True, db_index=True)
     # content
     content = models.TextField()
     # language

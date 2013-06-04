@@ -17,6 +17,8 @@ class SnippetSerializer(serializers.ModelSerializer):
             format='html'
     )
 
+    lookup_field='uuid'
+
     class Meta:
         model = Snippet
         read_only_fields = ('created',)
