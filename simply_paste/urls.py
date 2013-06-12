@@ -20,16 +20,9 @@ urlpatterns = patterns('',
     # snippets root
     url(r'^', include('snippets.urls')),
 
-    # legal pages
-    url(r'^terms/$', TemplateView.as_view(template_name = "content/terms.html"),
-        name="terms"),
-    url(r'^privacy/$',
-        TemplateView.as_view(template_name = "content/privacy.html"),
-        name="privacy"
-    ),
-    # about page
-    url(r'^about/$', TemplateView.as_view(template_name = "content/about.html"),
-        name="about"),
+    url(r'^terms/$', 'assets.views.TermsView', name="terms"),
+    url(r'^privacy/$', 'assets.views.PrivacyView', name="privacy"),
+    url(r'^about/$', 'assets.views.AboutView', name="about"),
 )
 
 if settings.STATIC_DEBUG:

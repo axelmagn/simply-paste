@@ -30,3 +30,4 @@ class SnippetCreateView(generics.CreateAPIView):
         request.session[SESSION_SNIPPET_ID] = None
         return Response(template_name='snippets/create.html')
 
+
