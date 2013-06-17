@@ -36,11 +36,16 @@
 
 {% block content %}
 
+
 {% addtoblock "css" %}
 <style type="text/css" media="screen">
 </style>
 <link rel="stylesheet" href="{% static 'css/snippets.css' %}">
 {% endaddtoblock %}
+
+<div id="welcome-message">
+    {% include "content/_welcome.html" %}
+</div>
 
 <div id="editor"></div>
 
