@@ -35,6 +35,7 @@ if DEBUG:
 else:
     ALLOWED_HOSTS = [
             'pasterly.com',
+            'www.pasterly.com',
     ]
 
 # Local time zone for this installation. Choices can be found here:
