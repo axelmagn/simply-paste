@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.views.generic.base import TemplateView
+from assets.views import AboutView, PrivacyView, TermsView
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -17,19 +18,13 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
+    url(r'^terms/$', TermsView.as_view(), name="terms"),
+    url(r'^privacy/$', PrivacyView.as_view(), name="privacy"),
+    url(r'^about/$', AboutView.as_view(), name="about"),
+
     # snippets root
     url(r'^', include('snippets.urls')),
 
-    # legal pages
-    url(r'^terms/$', TemplateView.as_view(template_name = "content/terms.html"),
-        name="terms"),
-    url(r'^privacy/$',
-        TemplateView.as_view(template_name = "content/privacy.html"),
-        name="privacy"
-    ),
-    # about page
-    url(r'^about/$', TemplateView.as_view(template_name = "content/about.html"),
-        name="about"),
 )
 
 if settings.STATIC_DEBUG:
