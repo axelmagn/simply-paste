@@ -9,7 +9,7 @@ import dj_database_url
 gettext = lambda s: s
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 STATIC_DEBUG = DEBUG
 REQUIRE_DEBUG = DEBUG
