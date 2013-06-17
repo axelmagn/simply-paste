@@ -4,6 +4,8 @@
     left: 380px;
     bottom: 0;
     right: 0;
+    background-color: #2F3129;
+    color: #CDCECA;
 }
 
 #welcome-message {
@@ -14,7 +16,6 @@
     width: 300px;
     padding: 40px;
     background-color: #2F3129;
-    /* color: #8F908A; */
     color: #CDCECA;
 }
 
