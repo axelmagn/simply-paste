@@ -4,11 +4,6 @@ from snippets import api, views
 
 
 urlpatterns = patterns('',
-        # main views
-        url(r'^(?P<pk>\w+)/$', views.SnippetRetrieveView.as_view(),
-            name="snippet-retrieve"),
-        url(r'^$', views.SnippetCreateView.as_view(),
-            name="home"),
 
         # api
         url(r'^api/$', api.api_root),
@@ -20,6 +15,12 @@ urlpatterns = patterns('',
             name="snippet-lang-choices"),
         url(r'^api/snippets/(?P<pk>\w+)/$', api.SnippetRetrieve.as_view(),
             name="snippet-retrieve-api"),
+
+        # main views
+        url(r'^(?P<pk>\w+)/$', views.SnippetRetrieveView.as_view(),
+            name="snippet-retrieve"),
+        url(r'^$', views.SnippetCreateView.as_view(),
+            name="home"),
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)
