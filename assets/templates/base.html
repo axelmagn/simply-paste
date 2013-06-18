@@ -82,14 +82,7 @@
     {% require_module "base" %}
     {% endblock %}
 
-    {% comment %}
     {% addtoblock "js" %}
-    <script>window.jQuery || document.write('<script href="{% static 'js/vendor/jquery-1.9.1.min.js' %}"><\/script>')</script>
-
-        <script href="{% static 'js/vendor/bootstrap.min.js' %}"></script>
-
-        <script href="{% static 'js/main.js' %}"></script>
-
         <!-- Google Analytics -->
         <script type="text/javascript">
 
@@ -106,6 +99,5 @@
 
         </script>
 {% endaddtoblock %}
-{% endcomment %}
     </body>
 </html>
