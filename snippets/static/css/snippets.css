@@ -8,6 +8,27 @@
     color: #CDCECA;
 }
 
+body.snippet-create #editor { 
+    position: absolute;
+    top: 42px;
+    left: 380px;
+    bottom: 0;
+    right: 0;
+    background-color: #2F3129;
+    color: #CDCECA;
+}
+
+body.snippet-retrieve #editor {
+    position: absolute;
+    top: 42px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #2F3129;
+    color: #CDCECA;
+}
+
+
 #welcome-message {
     position: absolute;
     top: 42px;
