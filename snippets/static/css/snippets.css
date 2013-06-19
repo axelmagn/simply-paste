@@ -39,6 +39,9 @@ body.snippet-retrieve #editor {
     background-color: #2F3129;
     color: #CDCECA;
 }
+body.snippet-retrieve #welcome-message {
+    display: hidden;
+}
 
 #display-url {
     display: inline-block;
